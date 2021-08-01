@@ -63,11 +63,17 @@ export function LoginFormF(){
         };
     }, []);
 
+    const isInitialMount = useRef(true);
+    
     // did update
     useEffect(() => {
-        if(email === '')
-            return;
-
+        // if(email === '') // Not the best idea
+            //return;
+      if (isInitialMount.current) { // Much better
+         isInitialMount.current = false;
+      } else {
+          // Your useEffect code here to be run on update
+      }
         console.log('function Component did update');
     });
 
@@ -78,6 +84,8 @@ export function LoginFormF(){
 
         console.log('function Component: email did update');
     }, [email]);
+    //}, [email, password]); Can do it too
+    //}, [props.color]); Can do it too
 
     // on changing the password
     useEffect(() => {
